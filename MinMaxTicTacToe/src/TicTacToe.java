@@ -16,12 +16,12 @@ public class TicTacToe {
                 int row = sc.nextInt();
                 System.out.println("What column?");
                 int col = sc.nextInt();
-                gameState = board.play('X',row,col);
+                gameState = board.play('X',row,col,board.getBoxes());
             }
 //            //Bot Move
             else{
             System.out.println("Bot's turn");
-                gameState = board.play('O',0,0);
+                gameState = board.play('O',0,0,board.getBoxes());
             }
             board.printBoard();
             System.out.println("----------------");

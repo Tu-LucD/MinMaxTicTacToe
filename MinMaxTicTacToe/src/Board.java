@@ -10,20 +10,24 @@ public class Board {
         }
     }
 
-    public char play(char playerSymbol, int row, int col){
-        boxes[row][col] = playerSymbol;
-        return gameOver();
+    public char[][] getBoxes() {
+        return boxes;
     }
-    private char gameOver(){
+
+    public char play(char playerSymbol, int row, int col, char[][] board){
+        board[row][col] = playerSymbol;
+        return gameOver(board);
+    }
+    private char gameOver(char[][]board){
         char verifier;
         char comparator;
 
         //Check horizontal win
         for(int i = 0; i < 3; i++){
-            verifier = boxes[i][0];
-            comparator = boxes[i][0];
+            verifier = board[i][0];
+            comparator = board[i][0];
             for(int j = 0; j < 3; j++){
-                if(verifier != boxes[i][j]) comparator = boxes[i][j];
+                if(verifier != board[i][j]) comparator = board[i][j];
             }
             //Returns winner, either X or O
             if(verifier == comparator && verifier != '-') return verifier;
@@ -31,29 +35,29 @@ public class Board {
 
         //Check vertical win
         for(int i = 0; i < 3; i++){
-            verifier = boxes[0][i];
-            comparator = boxes[0][i];
+            verifier = board[0][i];
+            comparator = board[0][i];
             for(int j = 0; j < 3; j++){
-                if(verifier != boxes[j][i]) comparator = boxes[j][i];
+                if(verifier != board[j][i]) comparator = board[j][i];
             }
             //Returns winner, either X or O
             if(verifier == comparator && verifier != '-') return verifier;
         }
 
         //Check diagonal wins
-        verifier = boxes[0][0];
-        comparator = boxes[0][0];
+        verifier = board[0][0];
+        comparator = board[0][0];
         for(int i = 0; i < 3; i++){
-            if(verifier != boxes[i][i]) comparator = boxes[i][i];
+            if(verifier != board[i][i]) comparator = board[i][i];
         }
         //Returns winner, either X or O
         if(verifier == comparator && verifier != '-') return verifier;
 
 
-        verifier = boxes[0][2];
-        comparator = boxes[0][2];
+        verifier = board[0][2];
+        comparator = board[0][2];
         for(int i = 0; i < 3; i++){
-            if(verifier != boxes[i][2-i]) comparator = boxes[i][2-i];
+            if(verifier != board[i][2-i]) comparator = board[i][2-i];
         }
         //Returns winner, either X or O
         if(verifier == comparator && verifier != '-') return verifier;
@@ -62,7 +66,7 @@ public class Board {
         for(int i = 0; i < 3; i++){
             for(int j = 0; j < 3; j++){
                 //Not over
-                if(boxes[i][j] == '-') return 'N';
+                if(board[i][j] == '-') return 'N';
             }
         }
 
